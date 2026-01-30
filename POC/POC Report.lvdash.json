@@ -1,0 +1,163 @@
+{
+  "datasets": [
+    {
+      "name": "f8b33bf2",
+      "displayName": "fact_orders",
+      "queryLines": [
+        "SELECT * FROM workspace.gold.fact_orders o\r\n",
+        "left join workspace.gold.dim_customer c\r\n",
+        "on o.CustomerKey = c.CustomerId"
+      ]
+    },
+    {
+      "name": "d43e7792",
+      "displayName": "dim_product",
+      "queryLines": [
+        "SELECT * FROM workspace.gold.dim_product"
+      ]
+    },
+    {
+      "name": "6ed44d35",
+      "displayName": "dim_date",
+      "queryLines": [
+        "SELECT * FROM workspace.gold.dim_date"
+      ]
+    },
+    {
+      "name": "ca5f4136",
+      "displayName": "dim_customer",
+      "queryLines": [
+        "SELECT * FROM workspace.gold.dim_customer"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "name": "b0c80562",
+      "displayName": "Customers orders",
+      "layout": [
+        {
+          "widget": {
+            "name": "fde2e218",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f8b33bf2",
+                  "fields": [
+                    {
+                      "name": "CustomerId",
+                      "expression": "`CustomerId`"
+                    },
+                    {
+                      "name": "count(OrderId)",
+                      "expression": "COUNT(`OrderId`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "combo",
+              "encodings": {
+                "x": {
+                  "fieldName": "CustomerId",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "primary": {
+                    "fields": [
+                      {
+                        "fieldName": "count(OrderId)"
+                      }
+                    ]
+                  },
+                  "secondary": {
+                    "fields": []
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "e53f4df2",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "f8b33bf2",
+                  "fields": [
+                    {
+                      "name": "CustomerId",
+                      "expression": "`CustomerId`"
+                    },
+                    {
+                      "name": "OrderDateKey",
+                      "expression": "`OrderDateKey`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "version": 1,
+              "widgetType": "combo",
+              "encodings": {
+                "x": {
+                  "fieldName": "CustomerId",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "y": {
+                  "primary": {
+                    "fields": [
+                      {
+                        "fieldName": "OrderDateKey"
+                      }
+                    ]
+                  },
+                  "secondary": {
+                    "fields": []
+                  },
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              }
+            }
+          },
+          "position": {
+            "x": 1,
+            "y": 6,
+            "width": 3,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}

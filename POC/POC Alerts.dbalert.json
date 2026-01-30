@@ -1,0 +1,37 @@
+{
+  "evaluation": {
+    "source": {
+      "name": "action_name",
+      "display": "action_name",
+      "aggregation": "AGGREGATION_UNSPECIFIED"
+    },
+    "comparison_operator": "EQUAL",
+    "threshold": {
+      "value": {
+        "string_value": "runFailed"
+      }
+    },
+    "empty_result_state": "OK",
+    "notification": {
+      "retrigger_seconds": 0,
+      "notify_on_ok": true
+    }
+  },
+  "schedule": {
+    "quartz_cron_schedule": "13 0 * * * ?",
+    "timezone_id": "Asia/Calcutta"
+  },
+  "query_lines": [
+    "-- select * from",
+    "-- JOB_RUNS",
+    "-- where status = 'FAILED'",
+    "-- NOTIFY TO 'sgrnboff@gmail.com'",
+    "",
+    "",
+    "-- select distinct(service_name) from system.access.audit",
+    "",
+    "-- select * from system.access.audit where service_name = 'jobs';",
+    "",
+    "select * from system.access.audit where service_name = 'jobs' and action_name in (\"runSucceeded\", \"runFailed\") "
+  ]
+}
